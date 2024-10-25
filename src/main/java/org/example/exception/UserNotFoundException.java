@@ -1,4 +1,4 @@
-// src/main/java/org/example/exception/UserNotFoundException.java
+
 package org.example.exception;
 
 public class UserNotFoundException extends RuntimeException {
