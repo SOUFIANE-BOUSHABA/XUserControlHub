@@ -12,14 +12,15 @@ public class UserMapper {
             return null;
         }
 
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(user.getId());
-        userDTO.setFirstName(user.getFirstName());
-        userDTO.setLastName(user.getLastName());
-        userDTO.setIdentificationNumber(user.getIdentificationNumber());
-        userDTO.setNationality(user.getNationality());
-        userDTO.setRegistrationDate(user.getRegistrationDate());
-        userDTO.setExpirationDate(user.getExpirationDate());
+        UserDTO userDTO = new UserDTO(
+                user.getId(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getIdentificationNumber(),
+                user.getNationality(),
+                user.getRegistrationDate(),
+                user.getExpirationDate()
+        );
 
         return userDTO;
     }
@@ -30,14 +31,15 @@ public class UserMapper {
             return null;
         }
 
-        User user = new User();
-        user.setId(userDTO.getId());
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
-        user.setIdentificationNumber(userDTO.getIdentificationNumber());
-        user.setNationality(userDTO.getNationality());
-        user.setRegistrationDate(userDTO.getRegistrationDate());
-        user.setExpirationDate(userDTO.getExpirationDate());
+        User user = new User(
+                userDTO.id(),
+                userDTO.firstName(),
+                userDTO.lastName(),
+                userDTO.identificationNumber(),
+                userDTO.nationality(),
+                userDTO.registrationDate(),
+                userDTO.expirationDate()
+        );
 
         return user;
     }

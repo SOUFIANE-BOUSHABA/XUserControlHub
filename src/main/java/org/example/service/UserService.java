@@ -41,8 +41,8 @@ public class UserService {
 
 
     public UserDTO update(UserDTO userDTO) {
-        User user = userRepository.findById(userDTO.getId())
-                .orElseThrow(() -> new UserNotFoundException(userDTO.getId()));
+        User user = userRepository.findById(userDTO.id())
+                .orElseThrow(() -> new UserNotFoundException(userDTO.id()));
         user = UserMapper.toEntity(userDTO);
         return UserMapper.toDTO(userRepository.save(user));
     }
