@@ -1,7 +1,11 @@
+<%@ page import="org.example.entity.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="org.example.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>User List</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@1.0.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
@@ -20,17 +24,28 @@
     </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
-    <c:forEach var="user" items="${users}">
-      <tr>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${user.id}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${user.firstName}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${user.lastName}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-          <a href="${pageContext.request.contextPath}/users/edit/${user.id}" class="text-blue-600 hover:text-blue-900">Edit</a>
-          <a href="${pageContext.request.contextPath}/users/delete/${user.id}" class="text-red-600 hover:text-red-900 ml-4">Delete</a>
-        </td>
-      </tr>
-    </c:forEach>
+    <%
+      List<UserDTO> users = (List<UserDTO>) request.getAttribute("users");
+      if (users != null) {
+        for (UserDTO user : users) {
+    %>
+    <tr>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= user.id() %></td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= user.firstName() %></td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= user.lastName() %></td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+        <a href="<%= request.getContextPath() %>/users/edit/<%= user.id() %>" class="text-blue-600 hover:text-blue-900">Edit</a>
+        <a href="<%= request.getContextPath() %>/users/delete/<%= user.id() %>" class="text-red-600 hover:text-red-900 ml-4">Delete</a>
+      </td>
+    </tr>
+    <%
+      }
+    } else {
+    %>
+    <tr>
+      <td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500">No users found.</td>
+    </tr>
+    <% } %>
     </tbody>
   </table>
 </div>
